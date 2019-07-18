@@ -2,4 +2,5 @@
 *.log
 .idea/
 lib/
+target/
 
