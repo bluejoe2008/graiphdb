@@ -3,11 +3,13 @@ package cn.graiph.engine
 import java.io.File
 import java.util.Optional
 
+import cn.graiph.CypherPluginRegistry
 import org.apache.commons.io.IOUtils
 import org.neo4j.blob.utils.Logging
 import org.neo4j.graphdb.GraphDatabaseService
 import org.neo4j.graphdb.factory.GraphDatabaseFactory
 import org.neo4j.server.CommunityBootstrapper
+import org.springframework.context.support.ClassPathXmlApplicationContext
 
 import scala.collection.JavaConversions
 
@@ -16,6 +18,14 @@ import scala.collection.JavaConversions
   */
 object Graiph extends Logging {
   val logo = IOUtils.toString(this.getClass.getClassLoader.getResourceAsStream("logo.txt"), "utf-8");
+
+  val (valueMatcher, customPropertyProvider) = {
+    val appctx = new ClassPathXmlApplicationContext("cypher-plugins.xml");
+    val cypherPluginRegistry = appctx.getBean[CypherPluginRegistry](classOf[CypherPluginRegistry]);
+
+    (cypherPluginRegistry.createValueComparatorRegistry(configuration),
+      cypherPluginRegistry.createCustomPropertyProvider(configuration));
+  }
 
   def printLogo(): Unit = {
     println(logo);

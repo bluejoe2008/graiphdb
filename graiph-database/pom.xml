@@ -5,12 +5,26 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.graiphdb</groupId>
-    <artifactId>graiph-kernel</artifactId>
-    <version>0.1</version>
+    <artifactId>graiph-database</artifactId>
+    <parent>
+        <groupId>graiph</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.1</version>
+    </parent>
     <properties>
         <neo4j.version>3.5.6-SNAPSHOT</neo4j.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.0.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>graiph</groupId>
+            <artifactId>graiph-common</artifactId>
+            <version>0.1</version>
+        </dependency>
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-cypher-planner-3.5</artifactId>
@@ -36,7 +50,7 @@
             <groupId>org.neo4j.driver</groupId>
             <!--https://github.com/bluejoe2008/neo4j-java-driver-with-blob-->
             <artifactId>neo4j-java-driver</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <version>2.0.1-graiph</version>
         </dependency>
         <dependency>
             <groupId>org.scalatest</groupId>
