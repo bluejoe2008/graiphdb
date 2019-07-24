@@ -9,8 +9,7 @@ import org.apache.hadoop.hbase.client.ColumnFamilyDescriptorBuilder.ModifyableCo
 import org.apache.hadoop.hbase.client.TableDescriptorBuilder.ModifyableTableDescriptor
 import org.apache.hadoop.hbase.client._
 import org.neo4j.blob.{BlobId,Blob}
-import org.neo4j.blob.utils.Logging
-import org.neo4j.kernel.impl.Configuration
+import org.neo4j.blob.utils.{Configuration, Logging}
 import org.neo4j.kernel.impl.blob.BlobStorage
 
 import cn.graiph.storage.util.HBaseUtils

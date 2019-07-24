@@ -21,7 +21,7 @@
 import java.io.{File, FileInputStream}
 
 import org.apache.commons.io.IOUtils
-import org.neo4j.blob.{Blob, BlobFactory}
+import org.neo4j.blob.{Blob}
 import org.neo4j.graphdb.Node
 import org.neo4j.kernel.impl.InstanceContext
 import org.neo4j.kernel.impl.blob.BlobStorage
@@ -198,10 +198,10 @@ class LocalGraiphTest extends FunSuite with BeforeAndAfter with TestBase {
       JavaConversions.mapAsJavaMap(Map("NAME" -> "张三")));
 
     db2.execute("CREATE (n {name:{NAME}, photo:{BLOB_OBJECT}})",
-      JavaConversions.mapAsJavaMap(Map("NAME" -> "张三", "BLOB_OBJECT" -> BlobFactory.EMPTY)));
+      JavaConversions.mapAsJavaMap(Map("NAME" -> "张三", "BLOB_OBJECT" -> Blob.EMPTY)));
 
     db2.execute("CREATE (n {name:{NAME}, photo:{BLOB_OBJECT}})",
-      JavaConversions.mapAsJavaMap(Map("NAME" -> "张三", "BLOB_OBJECT" -> BlobFactory.fromFile(new File("./testdata/test1.png")))));
+      JavaConversions.mapAsJavaMap(Map("NAME" -> "张三", "BLOB_OBJECT" -> Blob.fromFile(new File("./testdata/test1.png")))));
 
     assert(3.toLong === db2.execute("match (n) where n.name=$NAME return count(n)",
       JavaConversions.mapAsJavaMap(Map("NAME" -> "张三"))).next().get("count(n)"));
@@ -212,7 +212,7 @@ class LocalGraiphTest extends FunSuite with BeforeAndAfter with TestBase {
     assert(null ==
       it2.next().get("n.photo"));
 
-    assert(it2.next().get("n.photo") === BlobFactory.EMPTY);
+    assert(it2.next().get("n.photo") === Blob.EMPTY);
 
     assert(IOUtils.toByteArray(new FileInputStream(new File("./testdata/test1.png"))) ===
       it2.next().get("n.photo").asInstanceOf[Blob].toBytes());

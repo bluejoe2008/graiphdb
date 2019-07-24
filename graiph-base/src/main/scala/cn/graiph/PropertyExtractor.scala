@@ -1,6 +1,6 @@
 package cn.graiph
 
-import cn.graiph.util.Configuration
+import org.neo4j.blob.utils.Configuration
 
 /**
   * Created by bluejoe on 2019/7/22.

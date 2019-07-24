@@ -2,7 +2,7 @@
 import java.io.File
 
 import org.apache.commons.io.FileUtils
-import org.neo4j.blob.BlobFactory
+import org.neo4j.blob.Blob
 import org.neo4j.graphdb.GraphDatabaseService
 import org.neo4j.graphdb.factory.GraphDatabaseFactory
 import org.neo4j.kernel.impl.InstanceContext
@@ -33,14 +33,14 @@ trait TestBase {
     node1.setProperty("age", 40);
 
     //with a blob property
-    node1.setProperty("photo", BlobFactory.fromFile(new File(testBaseDir+"/testdata/test.png")));
+    node1.setProperty("photo", Blob.fromFile(new File(testBaseDir+"/testdata/test.png")));
     //blob array
-    node1.setProperty("album", (0 to 5).map(x => BlobFactory.fromFile(new File(testBaseDir+"/testdata/test.png"))).toArray);
+    node1.setProperty("album", (0 to 5).map(x => Blob.fromFile(new File(testBaseDir+"/testdata/test.png"))).toArray);
 
     val node2 = db.createNode();
     node2.setProperty("name", "alex");
     //with a blob property
-    node2.setProperty("photo", BlobFactory.fromFile(new File(testBaseDir+"/testdata/test1.png")));
+    node2.setProperty("photo", Blob.fromFile(new File(testBaseDir+"/testdata/test1.png")));
     node2.setProperty("age", 10);
 
     //node2.createRelationshipTo(node1, RelationshipType.withName("dad"));

@@ -5,7 +5,7 @@ import org.apache.commons.io.IOUtils
 import org.neo4j.graphdb.Node
 import org.neo4j.kernel.impl.InstanceContext
 import org.neo4j.kernel.impl.blob.BlobStorage
-import org.neo4j.blob.{BlobFactory, Blob}
+import org.neo4j.blob.{Blob}
 import org.scalatest.{BeforeAndAfter, FunSuite}
 
 import scala.collection.JavaConversions
@@ -32,11 +32,11 @@ class GraphDbBlobMassTest extends FunSuite with BeforeAndAfter with TestBase {
       node1.setProperty("age", 40);
       node1.setProperty("sex", "男");
       //with 5 blob property
-      node1.setProperty("photo1", BlobFactory.fromFile(new File(testBaseDir+"/testdata/test.png")));
-      node1.setProperty("photo2", BlobFactory.fromFile(new File(testBaseDir+"/testdata/test1.png")));
-      node1.setProperty("photo3", BlobFactory.fromFile(new File(testBaseDir+"/testdata/test2.jpg")));
-      node1.setProperty("desc1", BlobFactory.fromFile(new File(testBaseDir+"/testdata/test.csv")));
-      node1.setProperty("desc2", BlobFactory.fromFile(new File(testBaseDir+"/testdata/test.csv")));
+      node1.setProperty("photo1", Blob.fromFile(new File(testBaseDir+"/testdata/test.png")));
+      node1.setProperty("photo2", Blob.fromFile(new File(testBaseDir+"/testdata/test1.png")));
+      node1.setProperty("photo3", Blob.fromFile(new File(testBaseDir+"/testdata/test2.jpg")));
+      node1.setProperty("desc1", Blob.fromFile(new File(testBaseDir+"/testdata/test.csv")));
+      node1.setProperty("desc2", Blob.fromFile(new File(testBaseDir+"/testdata/test.csv")));
 
       tx1.success();
     }
@@ -61,8 +61,8 @@ class GraphDbBlobMassTest extends FunSuite with BeforeAndAfter with TestBase {
     val it3 = db2.getAllNodes().iterator();
     for(i <- 1 to 10){
       val v1: Node = it3.next();
-      v1.setProperty("photo5", BlobFactory.fromFile(new File(testBaseDir+"/testdata/test.png")));
-      v1.setProperty("photo6", BlobFactory.fromFile(new File(testBaseDir+"/testdata/test1.png")));
+      v1.setProperty("photo5", Blob.fromFile(new File(testBaseDir+"/testdata/test.png")));
+      v1.setProperty("photo6", Blob.fromFile(new File(testBaseDir+"/testdata/test1.png")));
       tx3.success();
     }
     tx3.close();

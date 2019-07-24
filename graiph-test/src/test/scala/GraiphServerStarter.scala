@@ -7,7 +7,7 @@ import cn.graiph.engine.Graiph
   */
 object GraiphServerStarter {
   def main(args: Array[String]) {
-    Graiph.startServer(new File("./testdata/testdb/data/databases/graph.db"),
+    Graiph.startServer(new File("./testdata/testdb"),
       new File("./testdata/neo4j.conf"));
   }
 }

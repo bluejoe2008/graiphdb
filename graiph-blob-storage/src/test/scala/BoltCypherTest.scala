@@ -4,7 +4,7 @@ import java.net.URL
 import java.util.Optional
 
 import org.apache.commons.io.IOUtils
-import org.neo4j.blob.{BlobFactory, Blob}
+import org.neo4j.blob.{Blob}
 import org.neo4j.driver._
 import org.neo4j.server.CommunityBootstrapper
 import org.scalatest.{BeforeAndAfter, FunSuite}
@@ -126,16 +126,16 @@ class BoltCypherTest extends FunSuite with BeforeAndAfter with TestBase {
       Map("NAME" -> "张三"));
 
     conn.executeUpdate("CREATE (n {name:{NAME}, photo:{BLOB_OBJECT}})",
-      Map("NAME" -> "张三", "BLOB_OBJECT" -> BlobFactory.EMPTY));
+      Map("NAME" -> "张三", "BLOB_OBJECT" -> Blob.EMPTY));
 
     conn.executeUpdate("CREATE (n {name:{NAME}, photo:{BLOB_OBJECT}})",
-      Map("NAME" -> "张三", "BLOB_OBJECT" -> BlobFactory.fromFile(new File(s"$testBaseDir/testdata/test1.png"))));
+      Map("NAME" -> "张三", "BLOB_OBJECT" -> Blob.fromFile(new File(s"$testBaseDir/testdata/test1.png"))));
 
     conn.executeQuery("return {BLOB_OBJECT}",
-      Map("BLOB_OBJECT" -> BlobFactory.fromFile(new File(s"$testBaseDir/testdata/test.png"))));
+      Map("BLOB_OBJECT" -> Blob.fromFile(new File(s"$testBaseDir/testdata/test.png"))));
 
     conn.querySingleObject("return {BLOB_OBJECT}",
-      Map("BLOB_OBJECT" -> BlobFactory.fromFile(new File(s"$testBaseDir/testdata/test.png"))), (result: Record) => {
+      Map("BLOB_OBJECT" -> Blob.fromFile(new File(s"$testBaseDir/testdata/test.png"))), (result: Record) => {
         val blob = result.get(0).asBlob
 
         assert(IOUtils.toByteArray(new FileInputStream(new File(s"$testBaseDir/testdata/test.png"))) ===

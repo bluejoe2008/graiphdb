@@ -1,9 +1,7 @@
 package cn.aipm.text
 
-import cn.pidb.blob.PropertyExtractor
 import cn.aipm.service.ServiceInitializer
-import cn.pidb.util.Configuration
-import cn.pidb.util.ConfigurationUtils._
+import cn.graiph.PropertyExtractor
 
 class SentimentClassifier extends PropertyExtractor with ServiceInitializer {
 

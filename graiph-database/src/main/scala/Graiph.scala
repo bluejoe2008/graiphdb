@@ -3,13 +3,14 @@ package cn.graiph.engine
 import java.io.File
 import java.util.Optional
 
-import cn.graiph.CypherPluginRegistry
+import cn.graiph.{CustomPropertyProvider, CypherPluginRegistry, ValueMatcher}
 import org.apache.commons.io.IOUtils
 import org.neo4j.blob.utils.Logging
 import org.neo4j.graphdb.GraphDatabaseService
 import org.neo4j.graphdb.factory.GraphDatabaseFactory
+import org.neo4j.kernel.impl.blob.{BlobPropertyStoreServiceContext, BlobPropertyStoreServicePlugin, BlobPropertyStoreServicePlugins}
 import org.neo4j.server.CommunityBootstrapper
-import org.springframework.context.support.ClassPathXmlApplicationContext
+import org.springframework.context.support.FileSystemXmlApplicationContext
 
 import scala.collection.JavaConversions
 
@@ -19,19 +20,13 @@ import scala.collection.JavaConversions
 object Graiph extends Logging {
   val logo = IOUtils.toString(this.getClass.getClassLoader.getResourceAsStream("logo.txt"), "utf-8");
 
-  val (valueMatcher, customPropertyProvider) = {
-    val appctx = new ClassPathXmlApplicationContext("cypher-plugins.xml");
-    val cypherPluginRegistry = appctx.getBean[CypherPluginRegistry](classOf[CypherPluginRegistry]);
-
-    (cypherPluginRegistry.createValueComparatorRegistry(configuration),
-      cypherPluginRegistry.createCustomPropertyProvider(configuration));
-  }
+  BlobPropertyStoreServicePlugins.add(new SemanticOperatorPlugin());
 
   def printLogo(): Unit = {
     println(logo);
   }
 
-  GraiphDBInjection.touch;
+  CypherInjection.touch;
 
   def openDatabase(dbDir: File, propertiesFile: File): GraphDatabaseService = {
     val builder = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(dbDir);
@@ -40,6 +35,7 @@ object Graiph extends Logging {
     logger.info(s"loading configuration from $propertiesFile");
     //bolt server is not required
     builder.setConfig("dbms.connector.bolt.enabled", "false");
+    builder.setConfig("config.file.path", propertiesFile.getAbsolutePath);
     builder.newGraphDatabase();
   }
 
@@ -70,5 +66,46 @@ class GraiphServer(dbDir: File, configFile: File, configOverrides: Map[String, S
 
   def shutdown(): Unit = {
     server.stop();
+  }
+}
+
+class SemanticOperatorPlugin extends BlobPropertyStoreServicePlugin with Logging {
+  override def init(ctx: BlobPropertyStoreServiceContext): Unit = {
+    val configuration = ctx.configuration;
+    val cypherPluginRegistry = configuration.getRaw("blob.plugins.conf").map(x => {
+      val xml = new File(x);
+
+      val path =
+        if (xml.isAbsolute) {
+          xml.getPath
+        }
+        else {
+          val configFilePath = configuration.getRaw("config.file.path")
+          if (configFilePath.isDefined) {
+            new File(new File(configFilePath.get).getParentFile, x).getAbsoluteFile.getCanonicalPath
+          }
+          else {
+            xml.getAbsoluteFile.getCanonicalPath
+          }
+        }
+
+      logger.info(s"loading semantic plugins: $path");
+      val appctx = new FileSystemXmlApplicationContext("file:" + path);
+      appctx.getBean[CypherPluginRegistry](classOf[CypherPluginRegistry]);
+    }).getOrElse(new CypherPluginRegistry());
+
+    val customPropertyProvider = cypherPluginRegistry.createCustomPropertyProvider(configuration);
+    val valueMatcher = cypherPluginRegistry.createValueComparatorRegistry(configuration);
+
+    ctx.instanceContext.put[CustomPropertyProvider](customPropertyProvider);
+    ctx.instanceContext.put[ValueMatcher](valueMatcher);
+  }
+
+  override def stop(ctx: BlobPropertyStoreServiceContext): Unit = {
+
+  }
+
+  override def start(ctx: BlobPropertyStoreServiceContext): Unit = {
+
   }
 }

@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>graiph</groupId>
+    <groupId>cn.graiph</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
     <version>0.1</version>
@@ -10,20 +10,13 @@
         <module>graiph-blob-storage</module>
         <module>graiph-database</module>
         <module>semantic-operators</module>
-        <module>graiph-common</module>
+        <module>graiph-base</module>
+        <module>graiph-test</module>
     </modules>
 
     <name>${project.artifactId}</name>
     <description></description>
     <inceptionYear>2018</inceptionYear>
-
-    <licenses>
-        <license>
-            <name>My License</name>
-            <url>http://....</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

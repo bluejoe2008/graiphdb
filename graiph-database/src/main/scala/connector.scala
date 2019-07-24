@@ -158,7 +158,6 @@ class LocalGraphService(db: GraphDatabaseService)
       throw new UnsupportedOperationException();
     }
   }
-
 }
 
 class BoltService(url: String, user: String = "", pass: String = "")

@@ -4,10 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.graiphdb</groupId>
     <artifactId>graiph-database</artifactId>
     <parent>
-        <groupId>graiph</groupId>
+        <groupId>cn.graiph</groupId>
         <artifactId>parent</artifactId>
         <version>0.1</version>
     </parent>
@@ -21,15 +20,9 @@
             <version>4.0.0.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>graiph</groupId>
-            <artifactId>graiph-common</artifactId>
+            <groupId>cn.graiph</groupId>
+            <artifactId>graiph-base</artifactId>
             <version>0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-cypher-planner-3.5</artifactId>
-            <version>3.5.6-SNAPSHOT</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.neo4j</groupId>

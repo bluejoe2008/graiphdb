@@ -1,5 +1,5 @@
 package cn.aipm.test
-import cn.pidb.util.Configuration
+import org.neo4j.blob.utils.Configuration
 
 class ConfigTemp extends Configuration{
   override def getRaw(name: String): Option[String] = {

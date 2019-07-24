@@ -4,7 +4,7 @@ import java.io.File
 import org.junit.{Assert, Test}
 
 import cn.aipm.image.DogOrCatClassifier
-import cn.pidb.blob.Blob
+import org.neo4j.blob.Blob
 
 
 class AnimalClassifierTest extends TestBase {

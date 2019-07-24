@@ -20,7 +20,7 @@
 import java.io.{File, FileInputStream}
 
 import org.apache.commons.io.IOUtils
-import org.neo4j.blob.{Blob, BlobFactory}
+import org.neo4j.blob.{Blob}
 import org.neo4j.graphdb.{GraphDatabaseService, Node, Transaction}
 import org.neo4j.kernel.impl.InstanceContext
 import org.neo4j.kernel.impl.blob.BlobStorage
@@ -41,7 +41,7 @@ class MultiGraiphTest extends FunSuite with BeforeAndAfter with TestBase {
     val node1 = db.createNode();
     node1.setProperty("name", name);
     //with a blob property
-    node1.setProperty("photo", BlobFactory.fromFile(photo));
+    node1.setProperty("photo", Blob.fromFile(photo));
 
     tx;
   }

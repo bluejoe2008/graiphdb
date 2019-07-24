@@ -1,8 +1,8 @@
 package cn.aipm
 
 import cn.graiph.PropertyExtractor
-import cn.graiph.util.Configuration
 import org.neo4j.blob.Blob
+import org.neo4j.blob.utils.Configuration
 
 /**
   * Created by bluejoe on 2019/2/17.

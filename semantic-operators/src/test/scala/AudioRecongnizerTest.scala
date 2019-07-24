@@ -4,8 +4,7 @@ import java.io.File
 import org.junit.{Assert, Test}
 
 import cn.aipm.audio.AudioRecongnizer
-import cn.pidb.blob.Blob
-
+import org.neo4j.blob.Blob
 
 class AudioRecongnizerTest extends TestBase {
   val audioRecongnizer = new AudioRecongnizer()

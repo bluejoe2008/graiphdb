@@ -1,10 +1,15 @@
-package cn.graiph.engine;
+package cn.graiph.engine
 
-import org.neo4j.cypher.internal.runtime.interpreted.commands.expressions.{Expression => CommandExpression}
-import org.neo4j.blob.utils.Logging
+import cn.graiph.{CustomPropertyProvider, ValueMatcher}
+import org.neo4j.blob.utils.ReflectUtils._
+import org.neo4j.blob.utils.{ContextMap, Logging}
 import org.neo4j.cypher.internal.runtime.interpreted.commands.convert.{ExpressionConverters, ExtendedCommandExpr}
+import org.neo4j.cypher.internal.runtime.interpreted.commands.expressions.{Expression => CommandExpression}
+import org.neo4j.cypher.internal.runtime.interpreted.commands.predicates.Predicate
 import org.neo4j.cypher.internal.runtime.interpreted.commands.values.KeyToken
 import org.neo4j.cypher.internal.runtime.interpreted.commands.values.TokenType._
+import org.neo4j.cypher.internal.runtime.interpreted.pipes.QueryState
+import org.neo4j.cypher.internal.runtime.interpreted.{ExecutionContext, UpdateCountingQueryContext}
 import org.neo4j.cypher.internal.v3_5.ast.semantics._
 import org.neo4j.cypher.internal.v3_5.expressions.Expression.SemanticContext
 import org.neo4j.cypher.internal.v3_5.expressions._
@@ -13,19 +18,16 @@ import org.neo4j.cypher.internal.v3_5.util.InputPosition
 import org.neo4j.cypher.internal.v3_5.util.attribution.Id
 import org.neo4j.cypher.internal.v3_5.util.symbols._
 import org.neo4j.cypher.internal.v3_5.{expressions => ast}
-import org.parboiled.scala._
-import org.neo4j.cypher.internal.runtime.interpreted.commands.predicates.Predicate
-import org.neo4j.cypher.internal.runtime.interpreted.pipes.QueryState
-import org.neo4j.cypher.internal.runtime.interpreted.{ExecutionContext}
+import org.neo4j.kernel.configuration.Config
 import org.neo4j.values.AnyValue
-import org.neo4j.values.storable._
+import org.neo4j.values.storable.{Value, _}
 import org.neo4j.values.virtual.VirtualValues
-import org.neo4j.values.storable.Value
+import org.parboiled.scala._
 
 /**
   * Created by bluejoe on 2019/7/16.
   */
-object GraiphDBInjection extends Expressions with Logging {
+object CypherInjection extends Expressions with Logging {
   def touch = {}
 
   private def AlgoNameWithThreshold: Rule1[AlgoNameWithThresholdExpr] = rule("an algorithm with threshold") {
@@ -42,7 +44,11 @@ object GraiphDBInjection extends Expressions with Logging {
 
   logger.debug(s"injecting expression extensions...");
 
-  ExprExtensions.addExpr3((Expression2: Rule1[org.neo4j.cypher.internal.v3_5.expressions.Expression]) => {
+  ExprExtensions.extendsExpr2((Expression1: Rule1[org.neo4j.cypher.internal.v3_5.expressions.Expression]) => {
+    operator("->") ~~ (PropertyKeyName ~~>> (CustomPropertyExpr(_: ast.Expression, _))) ////NOTE: cypher plus
+  });
+
+  ExprExtensions.extendsExpr3((Expression2: Rule1[org.neo4j.cypher.internal.v3_5.expressions.Expression]) => {
     group(operator("~:") ~ optional(AlgoNameWithThreshold) ~~ Expression2) ~~>>
       ((a: ast.Expression, b, c) =>
         SemanticLikeExpr(a, b, c)) |
@@ -229,6 +235,22 @@ case class SemanticSetInExpr(lhs: Expression, ant: Option[AlgoNameWithThresholdE
 
 /////////////commands/////////////
 
+case class QueryStateEx(state: QueryState) {
+  def getInstanceContext(): ContextMap = {
+    val config = state match {
+      case x: UpdateCountingQueryContext => state._get("query.inner.inner.transactionalContext.tc.graph.graph.config")
+      case _ => state._get("query.inner.transactionalContext.tc.graph.graph.config")
+    }
+    config.asInstanceOf[Config].getInstanceContext
+  }
+
+  def getCustomPropertyProvider(): CustomPropertyProvider =
+    getInstanceContext().get[CustomPropertyProvider]()
+
+  def getValueMatcher(): ValueMatcher =
+    getInstanceContext().get[ValueMatcher]()
+}
+
 case class CustomPropertyCommand(mapExpr: CommandExpression, propertyKey: KeyToken)
   extends CommandExpression with Product with Serializable {
 
@@ -237,7 +259,7 @@ case class CustomPropertyCommand(mapExpr: CommandExpression, propertyKey: KeyTok
       case n if n == Values.NO_VALUE => Values.NO_VALUE
 
       case x: Value =>
-        val pv = Graiph.getCustomPropertyProvider
+        val pv = QueryStateEx(state).getCustomPropertyProvider
           .getCustomProperty(x.asObject, propertyKey.name)
 
         pv.map(Values.unsafeOf(_, true)).getOrElse(Values.NO_VALUE)
@@ -296,7 +318,7 @@ case class SemanticLikeCommand(lhsExpr: CommandExpression, ant: Option[AlgoNameW
         case (Values.NO_VALUE, Values.NO_VALUE) => Some(true)
         case (_, Values.NO_VALUE) => Some(false)
         case (Values.NO_VALUE, _) => Some(false)
-        case (a: Value, b: Value) => Graiph.getValueMatcher.like(a.asObject(), b.asObject(), algorithm, threshold)
+        case (a: Value, b: Value) => QueryStateEx(state).getValueMatcher.like(a.asObject(), b.asObject(), algorithm, threshold)
       }
     }
   }
@@ -330,7 +352,7 @@ case class SemanticContainCommand(lhsExpr: CommandExpression, ant: Option[AlgoNa
         case (Values.NO_VALUE, Values.NO_VALUE) => Some(true)
         case (_, Values.NO_VALUE) => Some(false)
         case (Values.NO_VALUE, _) => Some(false)
-        case (a: Value, b: Value) => Graiph.getValueMatcher.containsOne(a.asObject(), b.asObject(), algorithm, threshold)
+        case (a: Value, b: Value) => QueryStateEx(state).getValueMatcher.containsOne(a.asObject(), b.asObject(), algorithm, threshold)
       }
     }
   }
@@ -362,7 +384,7 @@ case class SemanticContainSetCommand(lhsExpr: CommandExpression, ant: Option[Alg
         case (Values.NO_VALUE, Values.NO_VALUE) => Some(true)
         case (_, Values.NO_VALUE) => Some(false)
         case (Values.NO_VALUE, _) => Some(false)
-        case (a: Value, b: Value) => Graiph.getValueMatcher.containsSet(a.asObject(), b.asObject(), algorithm, threshold)
+        case (a: Value, b: Value) => QueryStateEx(state).getValueMatcher.containsSet(a.asObject(), b.asObject(), algorithm, threshold)
       }
     }
   }
@@ -392,7 +414,7 @@ case class SemanticCompareCommand(lhsExpr: CommandExpression, ant: Option[AlgoNa
     execute(ctx, state) { (lValue: AnyValue, rValue: AnyValue) =>
       (lValue, rValue) match {
         case (x, y) if x == Values.NO_VALUE || y == Values.NO_VALUE => Values.NO_VALUE
-        case (a: Value, b: Value) => Graiph.getValueMatcher.compareOne(a.asObject, b.asObject(), algorithm).
+        case (a: Value, b: Value) => QueryStateEx(state).getValueMatcher.compareOne(a.asObject, b.asObject(), algorithm).
           map(Values.doubleValue(_)).getOrElse(Values.NO_VALUE)
       }
     }
@@ -411,7 +433,7 @@ case class SemanticSetCompareCommand(lhsExpr: CommandExpression, ant: Option[Alg
     execute(ctx, state) { (lValue: AnyValue, rValue: AnyValue) =>
       (lValue, rValue) match {
         case (x, y) if x == Values.NO_VALUE || y == Values.NO_VALUE => Values.NO_VALUE
-        case (a: Value, b: Value) => Graiph.getValueMatcher.compareSet(a.asObject, b.asObject(), algorithm).
+        case (a: Value, b: Value) => QueryStateEx(state).getValueMatcher.compareSet(a.asObject, b.asObject(), algorithm).
           map {
             aa => VirtualValues.list(aa.map {
               a => VirtualValues.list(a.map(x => Values.doubleValue(x)).toSeq: _*)
