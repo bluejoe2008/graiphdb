@@ -52,6 +52,7 @@
                                 <goals>
                                     <goal>shade</goal>
                                 </goals>
+
                                 <configuration>
                                     <artifactSet>
                                         <includes>
@@ -61,10 +62,29 @@
                                             <exclude>org.scala-lang:*</exclude>
                                         </excludes>
                                     </artifactSet>
+                                    <filters>
+                                        <filter>
+                                            <artifact>*:*</artifact>
+                                            <excludes>
+                                                <exclude>META-INF/*.SF</exclude>
+                                                <exclude>META-INF/*.DSA</exclude>
+                                                <exclude>META-INF/*.RSA</exclude>
+                                            </excludes>
+                                        </filter>
+                                    </filters>
+
                                     <transformers>
+                                        <transformer
+                                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                            <resource>META-INF/spring.handlers</resource>
+                                        </transformer>
                                         <transformer
                                                 implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                             <mainClass>cn.graiph.server.GraiphServerEntryPoint</mainClass>
+                                        </transformer>
+                                        <transformer
+                                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                            <resource>META-INF/spring.schemas</resource>
                                         </transformer>
                                     </transformers>
                                 </configuration>
