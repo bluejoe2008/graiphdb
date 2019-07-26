@@ -1,13 +1,12 @@
 import java.io.File
-
-import cn.graiph.engine.GraiphDB
+import cn.graiph.server.GraiphServer
 
 /**
   * Created by bluejoe on 2019/7/17.
   */
 object GraiphServerStarter {
   def main(args: Array[String]) {
-    GraiphDB.startServer(new File("./testdata/testdb"),
+    GraiphServer.startServer(new File("./testdata/testdb"),
       new File("./testdata/neo4j.conf"));
   }
 }

@@ -10,7 +10,23 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.neo4j.app:neo4j-server:3.5.6-BLOB" level="project" />
+    <orderEntry type="module" module-name="graiph-database" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.0.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.0.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.0.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:4.0.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.0.0.RELEASE" level="project" />
+    <orderEntry type="module" module-name="graiph-common" />
+    <orderEntry type="library" name="Maven: cn.graiph:blob-common:0.1" level="project" />
+    <orderEntry type="library" name="Maven: eu.medsea.mimeutil:mime-util:2.1.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.7" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.11" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang.modules:scala-parser-combinators_2.11:1.1.1" level="project" />
+    <orderEntry type="module" module-name="graiph-connector" />
+    <orderEntry type="library" name="Maven: org.neo4j.driver:neo4j-java-driver:2.0.1-graiph" level="project" />
+    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.neo4j:neo4j:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-kernel:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-annotation-processors:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-procedure-api:3.5.6-BLOB" level="project" />
@@ -38,7 +54,10 @@
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-rewriting-3.5:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-jmx:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-consistency-check:3.5.6-BLOB" level="project" />
-    <orderEntry type="library" name="Maven: org.neo4j:neo4j:3.5.6-BLOB" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Maven: org.neo4j.app:neo4j-server:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-security:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-logging:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-common:3.5.6-BLOB" level="project" />
@@ -103,13 +122,6 @@
     <orderEntry type="library" name="Maven: net.sf.opencsv:opencsv:2.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.8" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-bolt:3.5.6-BLOB" level="project" />
-    <orderEntry type="library" name="Maven: cn.graiph:blob-common:0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
-    <orderEntry type="library" name="Maven: eu.medsea.mimeutil:mime-util:2.1.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:slf4j-log4j12:1.5.6" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: log4j:log4j:1.2.14" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.7" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.11" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-values:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-ssl:3.5.6-BLOB" level="project" />
@@ -155,7 +167,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.specs2:specs2-matcher_2.11:4.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.specs2:specs2-common_2.11:4.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.specs2:specs2-fp_2.11:4.2.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.scala-lang.modules:scala-parser-combinators_2.11:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.scala-sbt:test-interface:1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.specs2:specs2-junit_2.11:4.2.0" level="project" />
   </component>
