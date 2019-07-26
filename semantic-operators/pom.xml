@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.graiph</groupId>
-            <artifactId>graiph-base</artifactId>
+            <artifactId>graiph-common</artifactId>
             <version>0.1</version>
         </dependency>
         <dependency>

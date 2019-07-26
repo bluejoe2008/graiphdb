@@ -9,8 +9,10 @@
     <modules>
         <module>graiph-blob-storage</module>
         <module>graiph-database</module>
+        <module>graiph-connector</module>
+        <module>graiph-server</module>
         <module>semantic-operators</module>
-        <module>graiph-base</module>
+        <module>graiph-common</module>
         <module>graiph-test</module>
     </modules>
 

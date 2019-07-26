@@ -21,7 +21,7 @@
 import java.io.{File, FileInputStream}
 import java.net.URL
 
-import cn.graiph.engine.{Graiph, GraiphServer}
+import cn.graiph.engine.{GraiphDB, GraiphServer}
 import org.apache.commons.io.IOUtils
 import org.neo4j.blob.{Blob}
 import org.neo4j.driver._
@@ -33,7 +33,7 @@ class RemoteGraiphTest extends FunSuite with BeforeAndAfter with TestBase {
 
   before {
     setupNewDatabase(new File("./testdata/testdb/data/databases/graph.db"));
-    server = Graiph.startServer(testDbDir, new File(testConfPath));
+    server = GraiphDB.startServer(testDbDir, new File(testConfPath));
   }
 
   after {
@@ -41,7 +41,7 @@ class RemoteGraiphTest extends FunSuite with BeforeAndAfter with TestBase {
   }
 
   test("test blob R/W via cypher") {
-    val conn = Graiph.connect("bolt://localhost:7687");
+    val conn = GraiphDB.connect("bolt://localhost:7687");
     //a non-blob
     val (node, name, age) = conn.querySingleObject("match (n) where n.name='bob' return n, n.name, n.age", (result: Record) => {
       (result.get("n").asNode(), result.get("n.name").asString(), result.get("n.age").asInt())
@@ -157,7 +157,7 @@ class RemoteGraiphTest extends FunSuite with BeforeAndAfter with TestBase {
   }
 
   test("test blob R/W via blob literal") {
-    val conn = Graiph.connect("bolt://localhost:7687");
+    val conn = GraiphDB.connect("bolt://localhost:7687");
 
     //blob
     val blob0 = conn.querySingleObject("return <base64://>", (result: Record) => {

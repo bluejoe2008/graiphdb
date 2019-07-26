@@ -1,6 +1,6 @@
 import java.io.File
 
-import cn.graiph.engine.Graiph
+import cn.graiph.engine.GraiphDB
 import org.apache.commons.io.FileUtils
 import org.neo4j.blob.Blob
 import org.neo4j.graphdb.GraphDatabaseService
@@ -42,6 +42,6 @@ trait TestBase {
   }
 
   def openDatabase(dbdir: File = testDbDir, conf: String = testConfPath): GraphDatabaseService = {
-    Graiph.openDatabase(dbdir.getAbsoluteFile.getCanonicalFile, new File(conf).getAbsoluteFile.getCanonicalFile)
+    GraiphDB.openDatabase(dbdir.getAbsoluteFile.getCanonicalFile, new File(conf).getAbsoluteFile.getCanonicalFile)
   }
 }

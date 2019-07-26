@@ -11,7 +11,7 @@
         <version>0.1</version>
     </parent>
     <properties>
-        <neo4j.version>3.5.6-SNAPSHOT</neo4j.version>
+        <neo4j.version>3.5.6-BLOB</neo4j.version>
     </properties>
     <dependencies>
         <dependency>
@@ -21,29 +21,23 @@
         </dependency>
         <dependency>
             <groupId>cn.graiph</groupId>
-            <artifactId>graiph-base</artifactId>
+            <artifactId>graiph-common</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.graiph</groupId>
+            <artifactId>graiph-connector</artifactId>
             <version>0.1</version>
         </dependency>
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j</artifactId>
-            <version>3.5.6-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.neo4j.app</groupId>
-            <artifactId>neo4j-server</artifactId>
-            <version>3.5.6-SNAPSHOT</version>
+            <version>3.5.6-BLOB</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.25</version>
-        </dependency>
-        <dependency>
-            <groupId>org.neo4j.driver</groupId>
-            <!--https://github.com/bluejoe2008/neo4j-java-driver-with-blob-->
-            <artifactId>neo4j-java-driver</artifactId>
-            <version>2.0.1-graiph</version>
         </dependency>
         <dependency>
             <groupId>org.scalatest</groupId>
