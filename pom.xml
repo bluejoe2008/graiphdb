@@ -14,6 +14,7 @@
         <module>semantic-operators</module>
         <module>graiph-common</module>
         <module>graiph-test</module>
+        <module>packaging</module>
     </modules>
 
     <name>${project.artifactId}</name>

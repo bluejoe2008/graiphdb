@@ -8,13 +8,13 @@ import org.neo4j.blob.utils.Logging
 import org.neo4j.graphdb.GraphDatabaseService
 import org.neo4j.graphdb.factory.GraphDatabaseFactory
 import org.neo4j.kernel.impl.blob.{BlobPropertyStoreServiceContext, BlobPropertyStoreServicePlugin, BlobPropertyStoreServicePlugins}
+import org.neo4j.kernel.internal.Version
 import org.springframework.context.support.FileSystemXmlApplicationContext
 
 /**
   * Created by bluejoe on 2019/7/17.
   */
 object GraiphDB extends Logging with Touchable {
-
   CypherInjection.touch;
   SemanticOperatorPluginInjection.touch;
 
@@ -65,7 +65,10 @@ class SemanticOperatorPlugin extends BlobPropertyStoreServicePlugin with Logging
       logger.info(s"loading semantic plugins: $path");
       val appctx = new FileSystemXmlApplicationContext("file:" + path);
       appctx.getBean[CypherPluginRegistry](classOf[CypherPluginRegistry]);
-    }).getOrElse(new CypherPluginRegistry());
+    }).getOrElse {
+      logger.info(s"semantic plugins not loaded: blob.plugins.conf=null");
+      new CypherPluginRegistry()
+    }
 
     val customPropertyProvider = cypherPluginRegistry.createCustomPropertyProvider(configuration);
     val valueMatcher = cypherPluginRegistry.createValueComparatorRegistry(configuration);

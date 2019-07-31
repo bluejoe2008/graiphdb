@@ -67,6 +67,10 @@
                                     <artifactSet>
                                         <includes>
                                             <include>*:*</include>
+                                            <!--
+                                            <include>cn.graiph:*</include>
+                                            <include>org.neo4j:*</include>
+                                            -->
                                         </includes>
                                         <excludes>
                                             <exclude>org.scala-lang:*</exclude>

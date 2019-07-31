@@ -6,7 +6,7 @@ import java.util.Optional
 import cn.graiph.db.{GraiphDB, Touchable}
 import org.apache.commons.io.IOUtils
 import org.neo4j.blob.utils.Logging
-import org.neo4j.server.CommunityBootstrapper
+import org.neo4j.server.{AbstractNeoServer, CommunityBootstrapper}
 
 import scala.collection.JavaConversions
 
@@ -14,13 +14,9 @@ import scala.collection.JavaConversions
   * Created by bluejoe on 2019/7/17.
   */
 object GraiphServer extends Logging with Touchable {
-  GraiphDB.touch;
-
   val logo = IOUtils.toString(this.getClass.getClassLoader.getResourceAsStream("logo.txt"), "utf-8");
-
-  def printLogo(): Unit = {
-    println(logo);
-  }
+  AbstractNeoServer.NEO4J_IS_STARTING_MESSAGE = "======== Graiph (Neo4j-3.5.6-BLOB) ======== "+"\r\n"+logo;
+  GraiphDB.touch;
 
   def startServer(dbDir: File, configFile: File, configOverrides: Map[String, String] = Map()): GraiphServer = {
     val server = new GraiphServer(dbDir, configFile, configOverrides);
@@ -33,7 +29,6 @@ class GraiphServer(dbDir: File, configFile: File, configOverrides: Map[String, S
   val server = new CommunityBootstrapper();
 
   def start(): Int = {
-    GraiphServer.printLogo();
     server.start(dbDir, Optional.of(configFile),
       JavaConversions.mapAsJavaMap(configOverrides));
   }

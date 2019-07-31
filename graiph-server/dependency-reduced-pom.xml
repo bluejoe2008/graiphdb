@@ -64,6 +64,7 @@
                     <transformer>
                       <resource>META-INF/spring.schemas</resource>
                     </transformer>
+                    <transformer />
                   </transformers>
                 </configuration>
               </execution>

@@ -8,7 +8,7 @@ import org.neo4j.server.CommunityEntryPoint
 object GraiphServerEntryPoint {
 
   def main(args: Array[String]) = {
-    GraiphServer.printLogo();
+    GraiphServer.touch;
     CommunityEntryPoint.main(args)
   };
 
