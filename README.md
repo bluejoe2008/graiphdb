@@ -41,13 +41,13 @@ Note: Once successfully startup, you will see following infos:
                           |_|
 ```
 
-## STEP 3: Connecting GraiphServer
+## STEP 3: connecting remote GraiphServer
 
 * `bin/cypher-shell`: open a graiph client to a remote server
 
 Also, you may visit `http://localhost:7474` to browse graph data.
 
-# APIs: Connecting remote GraiphServer
+# APIs: connecting remote GraiphServer
 
 use object `RemoteGraiph`:
 
@@ -74,7 +74,7 @@ use object `RemoteGraiph`:
 
 `graiph-connector-0.1.jar`: client SDK of GraiphServer.
 
-# APIs: Using embedded graiph database
+# APIs: using embedded graiph database
 
 using object `GraiphDB`:
 
