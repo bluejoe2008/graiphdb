@@ -73,7 +73,7 @@ the `match` command returns:
 
 in `neo4j-browser`, a BLOB property will be displayed as an image icon:
 
-<img src="https://github.com/cas-bigdatalab/graiphdb/blob/master/docs/neo4j-browser.png?raw=true">
+<img src="https://github.com/cas-bigdatalab/graiphdb/blob/master/docs/neo4j-browser.png?raw=true" width="500">
 
 NOTE: if user/password is required, try default values: `neo4j`/`neo4j`.
 
