@@ -2,35 +2,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>package</artifactId>
-        <groupId>com.github.grapheco.build</groupId>
-        <version>0.1</version>
-    </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.grapheco</groupId>
     <artifactId>graiph-connector</artifactId>
-
+    <version>0.1</version>
+    <name>GraiphServer connector</name>
+    <description>Scala/Java connector to GraiphServer</description>
+    <url>https://github.com/bluejoe2008/solr-sql</url>
+    <licenses>
+        <license>
+            <name>BSD 2-clause License</name>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>shenzhihong</name>
+            <email>bluejoe2008@gmail.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git@github.com:grapheco/graiphdb.git</connection>
+        <developerConnection>scm:git:git@github.com:grapheco/graiphdb.git</developerConnection>
+        <url>https://github.com/grapheco/graiphdb.git</url>
+        <tag>HEAD</tag>
+    </scm>
     <dependencies>
-        <!--
-        <dependency>
-            <groupId>cn.graiph</groupId>
-            <artifactId>blob-common</artifactId>
-            <version>0.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>cn.graiph</groupId>
-            <artifactId>graiph-common</artifactId>
-            <version>0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.neo4j.driver</groupId>
-            <artifactId>neo4j-java-driver</artifactId>
-            <version>2.0.1-graiph</version>
-        </dependency>
-        -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -92,4 +91,5 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
+
 </project>
