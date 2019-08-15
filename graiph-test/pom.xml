@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>parent</artifactId>
-        <groupId>cn.graiph</groupId>
+        <groupId>com.github.grapheco</groupId>
         <version>0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -12,27 +12,27 @@
     <artifactId>graiph-test</artifactId>
     <dependencies>
         <dependency>
-            <groupId>cn.graiph</groupId>
+            <groupId>com.github.grapheco</groupId>
             <artifactId>graiph-common</artifactId>
             <version>0.1</version>
         </dependency>
         <dependency>
-            <groupId>cn.graiph</groupId>
+            <groupId>com.github.grapheco</groupId>
             <artifactId>graiph-database</artifactId>
             <version>0.1</version>
         </dependency>
         <dependency>
-            <groupId>cn.graiph</groupId>
+            <groupId>com.github.grapheco</groupId>
             <artifactId>graiph-connector</artifactId>
             <version>0.1</version>
         </dependency>
         <dependency>
-            <groupId>cn.graiph</groupId>
+            <groupId>com.github.grapheco</groupId>
             <artifactId>semantic-operators</artifactId>
             <version>0.1</version>
         </dependency>
         <dependency>
-            <groupId>cn.graiph</groupId>
+            <groupId>com.github.grapheco</groupId>
             <artifactId>graiph-server</artifactId>
             <version>0.1</version>
         </dependency>

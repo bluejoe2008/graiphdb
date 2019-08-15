@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+<module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -19,12 +19,12 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.0.0.RELEASE" level="project" />
     <orderEntry type="module" module-name="graiph-common" />
-    <orderEntry type="library" name="Maven: cn.graiph:blob-common:0.1" level="project" />
-    <orderEntry type="library" name="Maven: eu.medsea.mimeutil:mime-util:2.1.3" level="project" />
+    <orderEntry type="library" name="Maven: com.github.grapheco:blob:0.1" level="project" />
     <orderEntry type="library" name="Maven: org.scala-lang.modules:scala-parser-combinators_2.11:1.1.1" level="project" />
     <orderEntry type="module" module-name="graiph-connector" />
     <orderEntry type="library" name="Maven: org.neo4j.driver:neo4j-java-driver:2.0.1-graiph" level="project" />
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: cn.graiph:blob-common:0.1" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-kernel:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-annotation-processors:3.5.6-BLOB" level="project" />
