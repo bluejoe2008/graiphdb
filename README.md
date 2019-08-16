@@ -1,3 +1,25 @@
+<!-- vscode-markdown-toc -->
+* [Building GraiphDB](#BuildingGraiphDB)
+* [Quick start](#Quickstart)
+	* [STEP 1: download package](#STEP1:downloadpackage)
+	* [STEP 2: start server](#STEP2:startserver)
+	* [STEP 3: connect remote GraiphServer](#STEP3:connectremoteGraiphServer)
+	* [STEP 4: querying on GraiphDB](#STEP4:queryingonGraiphDB)
+* [CypherPlus](#CypherPlus)
+	* [BLOB literals](#BLOBliterals)
+	* [property extration](#propertyextration)
+	* [semantic comparison](#semanticcomparison)
+* [For developers: APIs](#Fordevelopers:APIs)
+	* [connecting remote GraiphServer](#connectingremoteGraiphServer)
+	* [using embedded graiph database](#usingembeddedgraiphdatabase)
+* [handling BLOBs](#handlingBLOBs)
+
+<!-- vscode-markdown-toc-config
+	numbering=false
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+
 <img src="https://github.com/cas-bigdatalab/graiphdb/blob/master/docs/logo.png?raw=true" width=300>
 
 [![GitHub releases](https://img.shields.io/github/release/grapheco/graiph-dist.svg)](https://github.com/grapheco/graiph-dist/releases)
@@ -12,7 +34,7 @@ GraiphDB is an AI native graph database.
 
 GraiphDB uses graiph-neo4j, which enables Neo4j with BLOB handling functions.
 
-# Building GraiphDB
+## <a name='BuildingGraiphDB'></a>Building GraiphDB
 
 ```
 mvn clean install
@@ -20,16 +42,16 @@ mvn clean install
 
 this will install all artifacts in local maven repository.
 
-# Quick start
+## <a name='Quickstart'></a>Quick start
 
-## STEP 1: download package
+### <a name='STEP1:downloadpackage'></a>STEP 1: download package
 visit https://github.com/grapheco/graiph-dist/releases to get GraiphDB binary distributions.
 
 unpack `graiph-server-x.x.zip` in your local directory, e.g. `/usr/local/`.
 
 `cd /usr/local/graiph-server-x.x`
 
-## STEP 2: start server
+### <a name='STEP2:startserver'></a>STEP 2: start server
 
 * `bin/neo4j console`: start a graiph server
 * `bin/neo4j start`: start a graiph server silently
@@ -52,7 +74,7 @@ Note: Once successfully startup, you will see following infos:
                           |_|
 ```
 
-## STEP 3: connect remote GraiphServer
+### <a name='STEP3:connectremoteGraiphServer'></a>STEP 3: connect remote GraiphServer
 
 clients communicate with GraiphServer via `Cypher` over Bolt protocol.
 
@@ -60,7 +82,7 @@ clients communicate with GraiphServer via `Cypher` over Bolt protocol.
 
 Also, you may visit `http://localhost:7474`  to browse graph data in `neo4j-browser`.
 
-## querying on GraiphDB
+### <a name='STEP4:queryingonGraiphDB'></a>STEP 4: querying on GraiphDB
 
 in `cypher-shell` or `neo4j-browser`, users can input `Cypher` commands to query on GraiphDB.
 
@@ -86,11 +108,11 @@ in `neo4j-browser`, a BLOB property will be displayed as an image icon:
 
 NOTE: if user/password is required, try default values: `neo4j`/`neo4j`.
 
-# CypherPlus
+## <a name='CypherPlus'></a>CypherPlus
 
 GraiphDB enhances `Cypher` grammar, naming CypherPlus. CypherPlus allows writing BLOB literals in query commands, also it allows semantic operations on properties, especially BLOB properties.
 
-## BLOB literals
+### <a name='BLOBliterals'></a>BLOB literals
 
 `BlobLiteral` is defined in Cypher grammar in form of:
 `<schema://path>`
@@ -109,7 +131,7 @@ return <https://bluejoe2008.github.io/bluejoe3.png>
 
 more details, see https://github.com/bluejoe2008/graiph-neo4j/blob/cypher-extension/README.md
 
-## property extration
+### <a name='propertyextration'></a>property extration
 
 ```
 neo4j@<default_database>> match (n {name:'bluejoe'}) return n.photo->mime, n.car->width;
@@ -136,7 +158,7 @@ neo4j@<default_database>> match (n {name:'bluejoe'}) return n.car->plateNumber;
 Failed connect to http://10.0.86.128:8081
 ```
 
-## semantic comparison
+### <a name='semanticcomparison'></a>semantic comparison
 
 CypherPlus allows semantic comparison on two properties.
 
@@ -156,7 +178,8 @@ A good idea is to determine if a person appear in another photo:
 return <http://s12.sinaimg.cn/mw690/005AE7Quzy7rL8kA4Nt6b&690> ~:0.5 <http://s15.sinaimg.cn/mw690/005AE7Quzy7rL8j2jlIee&690>
 ```
 
-# APIs: connecting remote GraiphServer
+## <a name='Fordevelopers:APIs'></a>For developers: APIs
+### <a name='connectingremoteGraiphServer'></a>connecting remote GraiphServer
 
 import `graiph-client-all` dependency first:
 ```
@@ -200,7 +223,7 @@ A simple example:
 
 more example code, see https://github.com/grapheco/graiph-dist/tree/master/graiph-client-test
 
-# APIs: using embedded graiph database
+### <a name='usingembeddedgraiphdatabase'></a>using embedded graiph database
 
 import `graiph-database-all` dependency first:
 
@@ -246,7 +269,7 @@ YES! `GraiphDB.connect()` returns a `CypherService` too, just like that of `Remo
 
 more example code, see https://github.com/grapheco/graiph-dist/tree/master/graiph-database-test
 
-# handling BLOBs
+## <a name='handlingBLOBs'></a>handling BLOBs
 
 graiph-neo4j enhances Neo4j with a set of blob operation functions which makes it possible and convenient to store and use the BLOB in neo4j.
 
