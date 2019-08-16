@@ -1,15 +1,15 @@
 <!-- vscode-markdown-toc -->
 * [Building GraiphDB](#BuildingGraiphDB)
 * [Quick start](#Quickstart)
-	* [STEP 1: download package](#STEP1:downloadpackage)
-	* [STEP 2: start server](#STEP2:startserver)
-	* [STEP 3: connect remote GraiphServer](#STEP3:connectremoteGraiphServer)
-	* [STEP 4: querying on GraiphDB](#STEP4:queryingonGraiphDB)
+	* [STEP 1. download package](#STEP1.downloadpackage)
+	* [STEP 2. start server](#STEP2.startserver)
+	* [STEP 3. connect remote GraiphServer](#STEP3.connectremoteGraiphServer)
+	* [STEP 4. querying on GraiphDB](#STEP4.queryingonGraiphDB)
 * [CypherPlus](#CypherPlus)
 	* [BLOB literals](#BLOBliterals)
 	* [property extration](#propertyextration)
 	* [semantic comparison](#semanticcomparison)
-* [For developers: APIs](#Fordevelopers:APIs)
+* [developers' manual](#developersmanual)
 	* [connecting remote GraiphServer](#connectingremoteGraiphServer)
 	* [using embedded graiph database](#usingembeddedgraiphdatabase)
 * [handling BLOBs](#handlingBLOBs)
@@ -44,14 +44,14 @@ this will install all artifacts in local maven repository.
 
 ## <a name='Quickstart'></a>Quick start
 
-### <a name='STEP1:downloadpackage'></a>STEP 1: download package
+### <a name='STEP1.downloadpackage'></a>STEP 1. download package
 visit https://github.com/grapheco/graiph-dist/releases to get GraiphDB binary distributions.
 
 unpack `graiph-server-x.x.zip` in your local directory, e.g. `/usr/local/`.
 
 `cd /usr/local/graiph-server-x.x`
 
-### <a name='STEP2:startserver'></a>STEP 2: start server
+### <a name='STEP2.startserver'></a>STEP 2. start server
 
 * `bin/neo4j console`: start a graiph server
 * `bin/neo4j start`: start a graiph server silently
@@ -74,7 +74,7 @@ Note: Once successfully startup, you will see following infos:
                           |_|
 ```
 
-### <a name='STEP3:connectremoteGraiphServer'></a>STEP 3: connect remote GraiphServer
+### <a name='STEP3.connectremoteGraiphServer'></a>STEP 3. connect remote GraiphServer
 
 clients communicate with GraiphServer via `Cypher` over Bolt protocol.
 
@@ -82,7 +82,7 @@ clients communicate with GraiphServer via `Cypher` over Bolt protocol.
 
 Also, you may visit `http://localhost:7474`  to browse graph data in `neo4j-browser`.
 
-### <a name='STEP4:queryingonGraiphDB'></a>STEP 4: querying on GraiphDB
+### <a name='STEP4.queryingonGraiphDB'></a>STEP 4. querying on GraiphDB
 
 in `cypher-shell` or `neo4j-browser`, users can input `Cypher` commands to query on GraiphDB.
 
@@ -178,7 +178,7 @@ A good idea is to determine if a person appear in another photo:
 return <http://s12.sinaimg.cn/mw690/005AE7Quzy7rL8kA4Nt6b&690> ~:0.5 <http://s15.sinaimg.cn/mw690/005AE7Quzy7rL8j2jlIee&690>
 ```
 
-## <a name='Fordevelopers:APIs'></a>For developers: APIs
+## <a name='developersmanual'></a>developers' manual
 ### <a name='connectingremoteGraiphServer'></a>connecting remote GraiphServer
 
 import `graiph-client-all` dependency first:
