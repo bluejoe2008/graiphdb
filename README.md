@@ -1,7 +1,16 @@
 <img src="https://github.com/cas-bigdatalab/graiphdb/blob/master/docs/logo.png?raw=true" width=300>
 
+[![GitHub releases](https://img.shields.io/github/release/grapheco/graiph-dist.svg)](https://github.com/grapheco/graiph-dist/releases)
+[![GitHub downloads](https://img.shields.io/github/downloads/grapheco/graiph-dist/total.svg)](https://github.com/grapheco/graiph-dist/releases)
+[![GitHub issues](https://img.shields.io/github/issues/grapheco/graiphdb.svg)](https://github.com/grapheco/graiphdb/issues)
+[![GitHub forks](https://img.shields.io/github/forks/grapheco/graiphdb.svg)](https://github.com/grapheco/graiphdb/network)
+[![GitHub stars](https://img.shields.io/github/stars/grapheco/graiphdb.svg)](https://github.com/grapheco/graiphdb/stargazers)
+[![GitHub license](https://img.shields.io/github/license/grapheco/graiphdb.svg)](https://github.com/grapheco/graiphdb/blob/master/LICENSE)
+
 # GraiphDB
-an AI native graph database, GraiphDB uses graiph-neo4j, which enables Neo4j with BLOB handling fuctions.
+GraiphDB is an AI native graph database.
+
+GraiphDB uses graiph-neo4j, which enables Neo4j with BLOB handling functions.
 
 # Building GraiphDB
 
@@ -45,15 +54,15 @@ Note: Once successfully startup, you will see following infos:
 
 ## STEP 3: connect remote GraiphServer
 
-clients communicate with GraiphServer via Cypher over Bolt protocol.
+clients communicate with GraiphServer via `Cypher` over Bolt protocol.
 
 * `bin/cypher-shell`: open a graiph client to a remote server
 
 Also, you may visit `http://localhost:7474`  to browse graph data in `neo4j-browser`.
 
-## querying GraiphDB
+## querying on GraiphDB
 
-in `cypher-shell` or `neo4j-browser`, users can input Cypher commands to query GraiphDB.
+in `cypher-shell` or `neo4j-browser`, users can input `Cypher` commands to query on GraiphDB.
 
 ```
 create (bluejoe:Person {name: 'bluejoe', mail:'bluejoe2008@gmail.com', photo: <https://bluejoe2008.github.io/bluejoe3.png>, car: <http://s5.sinaimg.cn/middle/005AE7Quzy7rL9U08Pa24&690>}) 
@@ -79,9 +88,9 @@ NOTE: if user/password is required, try default values: `neo4j`/`neo4j`.
 
 # CypherPlus
 
-GraiphDB enhances Cypher grammar, naming CypherPlus. CypherPlus allows writing BLOB literals in query commands, also it allows semantic operations on properties, especially BLOB properties.
+GraiphDB enhances `Cypher` grammar, naming CypherPlus. CypherPlus allows writing BLOB literals in query commands, also it allows semantic operations on properties, especially BLOB properties.
 
-## BLOB literal
+## BLOB literals
 
 `BlobLiteral` is defined in Cypher grammar in form of:
 `<schema://path>`
@@ -149,6 +158,14 @@ return <http://s12.sinaimg.cn/mw690/005AE7Quzy7rL8kA4Nt6b&690> ~:0.5 <http://s15
 
 # APIs: connecting remote GraiphServer
 
+import `graiph-client-all` dependency first:
+```
+   <dependency>
+      <groupId>com.github.grapheco</groupId>
+      <artifactId>graiph-client-all</artifactId>
+      <version>0.1.0</version>
+   </dependency>
+```
 use object `RemoteGraiph.connect()`:
 
 * def connect(url: String, user: String = "", pass: String = ""): CypherService
@@ -172,9 +189,28 @@ use object `RemoteGraiph.connect()`:
 
 * def querySingleObject[T](queryString: String, params: Map[String, AnyRef], fnMap: (Record => T)): T
 
-NOTE: you may download `graiph-connector-0.1.jar` from https://github.com/grapheco/graiph-dist/releases first.
+A simple example:
+```
+    val conn = RemoteGraiph.connect("bolt://localhost:7687", "neo4j", "123");
+    //a non-blob
+    val (node, name, age) = conn.querySingleObject("match (n) where n.name='bob' return n, n.name, n.age", (result: Record) => {
+      (result.get("n").asNode(), result.get("n.name").asString(), result.get("n.age").asInt())
+    });
+```
+
+more example code, see https://github.com/grapheco/graiph-dist/tree/master/graiph-client-test
 
 # APIs: using embedded graiph database
+
+import `graiph-database-all` dependency first:
+
+```
+   <dependency>
+      <groupId>com.github.grapheco</groupId>
+      <artifactId>graiph-database-all</artifactId>
+      <version>0.1.0</version>
+   </dependency>
+```
 
 using object `GraiphDB`:
 
@@ -182,8 +218,36 @@ using object `GraiphDB`:
 
 *  def connect(dbs: GraphDatabaseService): CypherService
 
+An example of `openDatabase`:
+```
+   val db = GraiphDB.openDatabase(new File("./testdb"), new File("./neo4j.conf"));
+   val tx = db.beginTx();
+   //create a node
+   val node1 = db.createNode();
+
+   node1.setProperty("name", "bob");
+   node1.setProperty("age", 40);
+
+   //with a blob property
+   node1.setProperty("photo", Blob.fromFile(new File("./testdata/test.png")));
+   ...
+```
+
+An example of `connect`:
+```
+   val db = GraiphDB.openDatabase(new File("./testdb"), new File("./neo4j.conf"));
+   val conn = GraiphDB.connect(db);
+   //a non-blob
+    val (node, name, age) = conn.querySingleObject("match (n) where n.name='bob' return n, n.name, n.age", (result: Record) => {
+      (result.get("n").asNode(), result.get("n.name").asString(), result.get("n.age").asInt())
+    });
+```
+YES! `GraiphDB.connect()` returns a `CypherService` too, just like that of `RemoteGraiph.connect()`.
+
+more example code, see https://github.com/grapheco/graiph-dist/tree/master/graiph-database-test
+
 # handling BLOBs
 
 graiph-neo4j enhances Neo4j with a set of blob operation functions which makes it possible and convenient to store and use the BLOB in neo4j.
 
-more details, see https://github.com/bluejoe2008/graiph-neo4j/blob/cypher-extension/README.md
+more details, see https://github.com/bluejoe2008/graiph-neo4j/blob/cypher-extension/blob.md

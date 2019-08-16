@@ -22,7 +22,7 @@
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.0.0.RELEASE" level="project" />
     <orderEntry type="module" module-name="graiph-common" />
-    <orderEntry type="library" name="Maven: com.github.grapheco:graiph-blob:0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.grapheco:graiph-blob:0.1.0" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="library" name="Maven: eu.medsea.mimeutil:mime-util:2.1.3" level="project" />
@@ -32,7 +32,6 @@
     <orderEntry type="module" module-name="graiph-connector" />
     <orderEntry type="library" name="Maven: org.neo4j.driver:neo4j-java-driver:2.0.1-graiph" level="project" />
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: cn.graiph:blob-common:0.1" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-kernel:3.5.6-BLOB" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-annotation-processors:3.5.6-BLOB" level="project" />

@@ -4,15 +4,15 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/testdata/cypher-plugins.xml</file>
-          <file>file://$MODULE_DIR$/testdata/cypher-plugins.xml</file>
+          <file>file://$MODULE_DIR$/../graiph-test/testdata/cypher-plugins.xml</file>
+          <file>file://$MODULE_DIR$/../graiph-test/testdata/cypher-plugins.xml</file>
         </fileset>
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/target/classes" />
-    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <output url="file://$MODULE_DIR$/../graiph-test/target/classes" />
+    <output-test url="file://$MODULE_DIR$/../graiph-test/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
@@ -24,7 +24,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="graiph-common" />
-    <orderEntry type="library" name="Maven: com.github.grapheco:graiph-blob:0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.grapheco:graiph-blob:0.1.0" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
@@ -115,7 +115,6 @@
     <orderEntry type="module" module-name="graiph-connector" />
     <orderEntry type="library" name="Maven: org.neo4j.driver:neo4j-java-driver:2.0.1-graiph" level="project" />
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: cn.graiph:blob-common:0.1" level="project" />
     <orderEntry type="module" module-name="semantic-operators" />
     <orderEntry type="library" name="Maven: info.debatty:java-string-similarity:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: net.jcip:jcip-annotations:1.0" level="project" />

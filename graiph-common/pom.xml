@@ -5,7 +5,7 @@
     <parent>
         <artifactId>parent</artifactId>
         <groupId>com.github.grapheco</groupId>
-        <version>0.1</version>
+        <version>0.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,7 +14,7 @@
         <dependency>
             <groupId>com.github.grapheco</groupId>
             <artifactId>graiph-blob</artifactId>
-            <version>0.1</version>
+            <version>0.1.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.scala-lang.modules/scala-parser-combinators -->
         <dependency>
@@ -26,85 +26,5 @@
 
     <name>graiph common API</name>
     <description>graiph common API</description>
-    <url>https://github.com/grapheco/graiphdb</url>
-    <licenses>
-        <license>
-            <name>BSD 2-clause License</name>
-            <url>http://opensource.org/licenses/BSD-2-Clause</url>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <name>shenzhihong</name>
-            <email>bluejoe2008@gmail.com</email>
-        </developer>
-    </developers>
-    <scm>
-        <connection>scm:git:git@github.com:grapheco/graiphdb.git</connection>
-        <developerConnection>scm:git:git@github.com:grapheco/graiphdb.git</developerConnection>
-        <url>https://github.com/grapheco/graiphdb.git</url>
-        <tag>HEAD</tag>
-    </scm>
 
-    <profiles>
-        <profile>
-            <!--mvn clean deploy -Prelease -Dgpg.passphrase=-->
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>2.2.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>net.alchim31.maven</groupId>
-                        <artifactId>scala-maven-plugin</artifactId>
-                        <version>3.3.2</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>doc-jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-            <distributionManagement>
-                <!-- note: update <mvn_home>/conf/settings.xml -->
-                <snapshotRepository>
-                    <id>oss</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                </snapshotRepository>
-                <repository>
-                    <id>oss</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-    </profiles>
 </project>

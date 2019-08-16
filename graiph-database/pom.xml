@@ -8,10 +8,11 @@
     <parent>
         <groupId>com.github.grapheco</groupId>
         <artifactId>parent</artifactId>
-        <version>0.1</version>
+        <version>0.1.0</version>
     </parent>
     <properties>
         <neo4j.version>3.5.6-BLOB</neo4j.version>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
     <dependencies>
         <dependency>
@@ -22,12 +23,12 @@
         <dependency>
             <groupId>com.github.grapheco</groupId>
             <artifactId>graiph-common</artifactId>
-            <version>0.1</version>
+            <version>0.1.0</version>
         </dependency>
         <dependency>
             <groupId>com.github.grapheco</groupId>
             <artifactId>graiph-connector</artifactId>
-            <version>0.1</version>
+            <version>0.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.neo4j</groupId>
