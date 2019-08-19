@@ -56,7 +56,7 @@ unpack `graiph-server-x.x.zip` in your local directory, e.g. `/usr/local/`.
 * `bin/neo4j console`: start a graiph server
 * `bin/neo4j start`: start a graiph server silently
 
-Once successfully startup, you will see following infos:
+Once successfully startup, infos will be shown as below:
 
 ```
 [17:12:24:866] DEBUG CypherInjection$     :: injecting cypher expression extensions...
