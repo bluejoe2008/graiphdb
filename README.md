@@ -86,7 +86,7 @@ NOTE: `cypher-shell` will recognize `//` as starting of comments, so some comman
 
 ### <a name='STEP4.queryingonGraiphDB'></a>STEP 4. querying on GraiphDB
 
-in `cypher-shell` or `neo4j-browser`, users can input `Cypher` commands to query on GraiphDB.
+in `neo4j-browser`, users can input `Cypher` commands to query on GraiphDB.
 
 ```
 create (bluejoe:Person {name: 'bluejoe', mail:'bluejoe2008@gmail.com', photo: <https://bluejoe2008.github.io/bluejoe3.png>, car: <http://s5.sinaimg.cn/middle/005AE7Quzy7rL9U08Pa24&690>}) 
