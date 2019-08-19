@@ -82,6 +82,8 @@ clients communicate with GraiphServer via `Cypher` over Bolt protocol.
 
 Also, you may visit `http://localhost:7474`  to browse graph data in `neo4j-browser`.
 
+NOTE: `cypher-shell` will recognize `//` as starting of comments, so some commands with `//` are recommended to be tested in `neo4j-browser`.
+
 ### <a name='STEP4.queryingonGraiphDB'></a>STEP 4. querying on GraiphDB
 
 in `cypher-shell` or `neo4j-browser`, users can input `Cypher` commands to query on GraiphDB.
