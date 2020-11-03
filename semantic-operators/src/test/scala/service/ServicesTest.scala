@@ -7,7 +7,7 @@ import org.junit.{Assert, Test}
 
 
 class ServicesTest extends TestBase with ServiceInitializer {
-  val hostUrl = "http://10.0.86.128:8081/"
+  val hostUrl = "http://aipm-host:8081/"
   initialize(config)
   @Test
   def test1(): Unit = {

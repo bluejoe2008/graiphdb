@@ -3,7 +3,7 @@ import org.neo4j.blob.utils.Configuration
 
 class ConfigTemp extends Configuration{
   override def getRaw(name: String): Option[String] = {
-    val configs = Map("aipm.http.host.url"->"http://10.0.86.128:8081/")
+    val configs = Map("aipm.http.host.url"->"http://aipm-host:8081/")
     configs.get(name)
   }
 }

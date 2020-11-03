@@ -153,11 +153,11 @@ neo4j@<default_database>> match (n {name:'bluejoe'}) return n.car->plateNumber;
 +--------------------+
 ```
 
-NOTE: some semantic operation requires an AIPM service at 10.0.86.128 (modify this setting in neo4j.conf), if it is unavailable, exceptions will be thrown:
+NOTE: some semantic operation requires an AIPM service at aipm-host (modify this setting in neo4j.conf), if it is unavailable, exceptions will be thrown:
 
 ```
 neo4j@<default_database>> match (n {name:'bluejoe'}) return n.car->plateNumber;
-Failed connect to http://10.0.86.128:8081
+Failed connect to http://aipm-host:8081
 ```
 
 ### <a name='semanticcomparison'></a>semantic comparison
